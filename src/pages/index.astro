@@ -1,0 +1,63 @@
+---
+// In Astro, a file's location under src/pages/ IS the URL.
+// This file is src/pages/index.astro, so it becomes your homepage: "/"
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="[Your Name] — Portfolio">
+  <section class="hero">
+    <p class="eyebrow">Hello, I'm</p>
+    <h1>[Your Name]</h1>
+    <p class="hero-summary">
+      EDIT THIS: two or three sentences about who you are, what you do, and
+      what kind of work excites you. Mention your role (e.g. "front-end
+      developer", "data analyst", "product designer") and one or two things
+      you're especially good at.
+    </p>
+  </section>
+
+  <section class="projects">
+    <h2>Selected projects</h2>
+    <ol class="project-list">
+      <li class="project-row">
+        <span class="project-number">01</span>
+        <a href="/projects/project-1" class="project-link">
+          <span class="project-title">Project One</span>
+          <span class="project-blurb">
+            EDIT THIS: one sentence describing what this project is.
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <span class="project-number">02</span>
+        <a href="/projects/project-2" class="project-link">
+          <span class="project-title">Project Two</span>
+          <span class="project-blurb">
+            EDIT THIS: one sentence describing what this project is.
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <span class="project-number">03</span>
+        <a href="/projects/project-3" class="project-link">
+          <span class="project-title">Project Three</span>
+          <span class="project-blurb">
+            EDIT THIS: one sentence describing what this project is.
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <span class="project-number">04</span>
+        <a href="/projects/project-4" class="project-link">
+          <span class="project-title">Project Four</span>
+          <span class="project-blurb">
+            EDIT THIS: one sentence describing what this project is.
+          </span>
+        </a>
+      </li>
+    </ol>
+  </section>
+</Layout>

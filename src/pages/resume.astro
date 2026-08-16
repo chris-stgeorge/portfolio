@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Resume — [Your Name]">
+  <section class="resume-page">
+    <h1>Resume</h1>
+    <p>
+      You can view my resume below, or
+      <a href="/resume.pdf" download class="project-cta">download the PDF</a>.
+    </p>
+
+    <div class="resume-embed">
+      <!--
+        This shows the PDF right on the page. It reads the file from
+        public/resume.pdf — replace that file with your real resume
+        (keep the filename "resume.pdf") and this will update automatically.
+        Note: some mobile browsers will just download the PDF instead of
+        showing it inline, which is expected.
+      -->
+      <iframe src="/resume.pdf" title="Resume PDF" width="100%" height="800"></iframe>
+    </div>
+  </section>
+</Layout>

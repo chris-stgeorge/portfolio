@@ -1,0 +1,310 @@
+/*
+  This file controls how the whole site looks: colors, fonts, spacing.
+  It's plain CSS — every page links to this one file, so changing a value
+  here changes it everywhere.
+
+  ---------------------------------------------------------------------
+  1. TOKENS — the site's palette and type, defined once as variables
+  ---------------------------------------------------------------------
+*/
+:root {
+  --bg: #fafafa;            /* page background */
+  --surface: #ffffff;       /* cards / raised panels */
+  --ink: #14161a;           /* main text color */
+  --muted: #5b6270;         /* secondary text color */
+  --border: #e4e4e0;        /* thin dividing lines */
+  --accent: #0e7c7b;        /* the one accent color, used sparingly */
+  --accent-ink: #ffffff;    /* text color on top of --accent */
+
+  --font-display: 'Fraunces', Georgia, serif;   /* headings */
+  --font-body: 'Inter', system-ui, sans-serif;  /* body text */
+
+  --max-width: 780px;
+}
+
+/*
+  ---------------------------------------------------------------------
+  2. RESET — browsers add their own default spacing/fonts; this removes
+  most of it so we start from a clean, predictable baseline.
+  ---------------------------------------------------------------------
+*/
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  margin: 0 0 0.5em 0;
+}
+p {
+  margin: 0 0 1em 0;
+}
+a {
+  color: var(--accent);
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/*
+  ---------------------------------------------------------------------
+  3. LAYOUT — header, main content area, footer
+  ---------------------------------------------------------------------
+*/
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 1rem;
+}
+.logo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.site-nav a:hover {
+  color: var(--accent);
+}
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem 1.5rem 4rem;
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/*
+  ---------------------------------------------------------------------
+  4. HOME PAGE — hero intro + the list of 4 projects
+  ---------------------------------------------------------------------
+*/
+.hero {
+  padding: 3rem 0 2.5rem;
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  margin-bottom: 0.6rem;
+}
+.hero-summary {
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.projects h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+.project-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+.project-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 0;
+}
+.project-number {
+  font-family: var(--font-display);
+  color: var(--accent);
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+.project-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+.project-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.project-link:hover .project-title {
+  color: var(--accent);
+}
+.project-blurb {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/*
+  ---------------------------------------------------------------------
+  5. PROJECT DETAIL PAGES
+  ---------------------------------------------------------------------
+*/
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.back-link:hover {
+  color: var(--accent);
+}
+.project-page h1 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+.project-meta {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+.project-page section {
+  margin-bottom: 2rem;
+}
+.project-page h2 {
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+.tag-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+}
+.tag-list li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.project-cta {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--accent-ink);
+  text-decoration: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+.project-cta:hover {
+  opacity: 0.9;
+}
+
+/*
+  ---------------------------------------------------------------------
+  6. RESUME PAGE
+  ---------------------------------------------------------------------
+*/
+.resume-page h1 {
+  margin-bottom: 0.5rem;
+}
+.resume-embed {
+  margin-top: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.resume-embed iframe {
+  display: block;
+  border: none;
+}
+
+/*
+  ---------------------------------------------------------------------
+  7. CONTACT PAGE
+  ---------------------------------------------------------------------
+*/
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  border-top: 1px solid var(--border);
+}
+.contact-list li {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.contact-label {
+  width: 100px;
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.contact-list a {
+  text-decoration: none;
+}
+.contact-list a:hover {
+  text-decoration: underline;
+}
+
+/*
+  ---------------------------------------------------------------------
+  8. SMALL SCREENS
+  ---------------------------------------------------------------------
+*/
+@media (max-width: 480px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .project-row {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .resume-embed iframe {
+    height: 500px;
+  }
+}
