@@ -8,18 +8,18 @@
   ---------------------------------------------------------------------
 */
 :root {
-  --bg: #fafafa;            /* page background */
-  --surface: #ffffff;       /* cards / raised panels */
-  --ink: #14161a;           /* main text color */
-  --muted: #5b6270;         /* secondary text color */
-  --border: #e4e4e0;        /* thin dividing lines */
-  --accent: #0e7c7b;        /* the one accent color, used sparingly */
-  --accent-ink: #ffffff;    /* text color on top of --accent */
+  --bg: #101216;             /* page background */
+  --surface: #1b1e25;        /* cards / raised panels */
+  --ink: #eef0f3;            /* main text color */
+  --muted: #9299a6;          /* secondary text color */
+  --border: #2b2f38;         /* thin dividing lines */
+  --accent: #35d0c0;         /* the one accent color, used sparingly */
+  --accent-ink: #0b0d10;     /* text color on top of --accent */
 
-  --font-display: 'Fraunces', Georgia, serif;   /* headings */
-  --font-body: 'Inter', system-ui, sans-serif;  /* body text */
+  --font-display: 'Roboto', system-ui, sans-serif;  /* headings/titles */
+  --font-body: 'Inter', system-ui, sans-serif;      /* body text */
 
-  --max-width: 780px;
+  --max-width: 960px;
 }
 
 /*
@@ -114,6 +114,20 @@ main {
 .hero {
   padding: 3rem 0 2.5rem;
 }
+/* Two columns: text on the left, an image on the right. Below 700px wide
+   (phones), it drops to a single column and stacks — text first, image
+   below — because that's the order the HTML is written in. */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+@media (max-width: 700px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -130,6 +144,25 @@ main {
   max-width: 60ch;
   color: var(--muted);
   font-size: 1.05rem;
+}
+
+/* Reusable stand-in box wherever a real image isn't in place yet. Swap
+   the <div class="image-placeholder"> for an <img src="/images/..." />
+   once you have real photos/renders — see README for the images folder. */
+.image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding: 1rem;
+}
+.hero-grid .image-placeholder {
+  aspect-ratio: 4 / 3;
 }
 
 .projects h2 {
@@ -157,10 +190,23 @@ main {
 }
 .project-link {
   display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+  align-items: center;
+  gap: 1.25rem;
+  flex: 1;
   text-decoration: none;
   color: var(--ink);
+}
+.project-link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+.project-thumb {
+  width: 96px;
+  height: 72px;
+  flex-shrink: 0;
+  font-size: 0.7rem;
 }
 .project-title {
   font-family: var(--font-display);
@@ -197,6 +243,29 @@ main {
   color: var(--muted);
   font-size: 0.95rem;
   margin-bottom: 2rem;
+}
+/* Text sections on the left, an image gallery on the right. Stacks to a
+   single column (text first, then images) below 700px wide. */
+.project-body {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+@media (max-width: 700px) {
+  .project-body {
+    grid-template-columns: 1fr;
+  }
+}
+.project-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.project-gallery .image-placeholder {
+  aspect-ratio: 4 / 3;
 }
 .project-page section {
   margin-bottom: 2rem;

@@ -5,15 +5,24 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Christopher St George — Portfolio">
-  <section class="hero">
-    <p class="eyebrow">Hello, I'm</p>
-    <h1>Christopher St George</h1>
-    <p class="hero-summary">
-      I'm a game designer and 3D artist with a focus on environment and
-      narrative design. I studied a Bachelor of Games and Interactive
-      Environments at QUT, majoring in Game Design with a minor in Systems
-      Technology.
-    </p>
+  <section class="hero hero-grid">
+    <div>
+      <p class="eyebrow">Hello, I'm</p>
+      <h1>Christopher St George</h1>
+      <p class="hero-summary">
+        I'm a game designer and 3D artist with a focus on environment and
+        narrative design. I studied a Bachelor of Games and Interactive
+        Environments at QUT, majoring in Game Design with a minor in Systems
+        Technology.
+      </p>
+    </div>
+    <!--
+      EDIT THIS: replace this placeholder with a real photo or piece of
+      artwork. Put the image file in public/images/ (create that folder),
+      then swap the <div> below for:
+      <img src="/images/your-file.jpg" alt="Christopher St George" />
+    -->
+    <div class="image-placeholder">Your photo or a hero artwork piece</div>
   </section>
 
   <section class="projects">
@@ -22,40 +31,56 @@ import Layout from '../layouts/Layout.astro';
       <li class="project-row">
         <span class="project-number">01</span>
         <a href="/projects/project-1" class="project-link">
-          <span class="project-title">Psychological Manipulation Simulator</span>
-          <span class="project-blurb">
-            An idle game — I created 52 pieces of collectible card artwork.
+          <span class="project-link-text">
+            <span class="project-title">Psychological Manipulation Simulator</span>
+            <span class="project-blurb">
+              An idle game — I created 52 pieces of collectible card artwork.
+            </span>
           </span>
+          <!-- EDIT THIS: swap for <img src="/images/project-1-thumb.jpg" alt="..." /> -->
+          <span class="image-placeholder project-thumb">Thumbnail</span>
         </a>
       </li>
 
       <li class="project-row">
         <span class="project-number">02</span>
         <a href="/projects/project-2" class="project-link">
-          <span class="project-title">Cardboard Castle</span>
-          <span class="project-blurb">
-            A VR puzzle game — I built the modular environment and props.
+          <span class="project-link-text">
+            <span class="project-title">Cardboard Castle</span>
+            <span class="project-blurb">
+              A VR puzzle game — I built the modular environment and props.
+            </span>
           </span>
+          <!-- EDIT THIS: swap for <img src="/images/project-2-thumb.jpg" alt="..." /> -->
+          <span class="image-placeholder project-thumb">Thumbnail</span>
         </a>
       </li>
 
       <li class="project-row">
         <span class="project-number">03</span>
         <a href="/projects/project-3" class="project-link">
-          <span class="project-title">PVP Shooter Level</span>
-          <span class="project-blurb">
-            A solo-developed level, designed layout and environment using an asset pack.
+          <span class="project-link-text">
+            <span class="project-title">PVP Shooter Level</span>
+            <span class="project-blurb">
+              A solo-developed level, designed layout and environment using an asset pack.
+            </span>
           </span>
+          <!-- EDIT THIS: swap for <img src="/images/project-3-thumb.jpg" alt="..." /> -->
+          <span class="image-placeholder project-thumb">Thumbnail</span>
         </a>
       </li>
 
       <li class="project-row">
         <span class="project-number">04</span>
         <a href="/projects/project-4" class="project-link">
-          <span class="project-title">GameCube-Style Beach Environment</span>
-          <span class="project-blurb">
-            A beach environment stylized after Nintendo GameCube aesthetics, built solo from scratch.
+          <span class="project-link-text">
+            <span class="project-title">GameCube-Style Beach Environment</span>
+            <span class="project-blurb">
+              A beach environment stylized after Nintendo GameCube aesthetics, built solo from scratch.
+            </span>
           </span>
+          <!-- EDIT THIS: swap for <img src="/images/project-4-thumb.jpg" alt="..." /> -->
+          <span class="image-placeholder project-thumb">Thumbnail</span>
         </a>
       </li>
     </ol>
