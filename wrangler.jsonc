@@ -1,0 +1,9 @@
+{
+  // Tells Cloudflare this is a static site: serve everything Astro builds
+  // into dist/ directly, with no server-side Worker code needed.
+  "name": "portfolio",
+  "compatibility_date": "2026-08-16",
+  "assets": {
+    "directory": "dist"
+  }
+}
