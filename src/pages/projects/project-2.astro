@@ -9,7 +9,7 @@ import Gallery from '../../components/Gallery.astro';
 
     <h1>Cardboard Castle</h1>
     <p class="project-meta">
-      Environment Artist
+      Environment Artist &amp; Puzzle Designer
     </p>
 
     <div class="project-body">
@@ -17,24 +17,64 @@ import Gallery from '../../components/Gallery.astro';
         <section>
           <h2>Overview</h2>
           <p>
-            Cardboard Castle is a VR puzzle game.
+            Cardboard Castle is a Unity VR puzzle game that me and a team of 3
+            other students developed for QUT's Design and Development of
+            Immersive Environments unit. We were tasked with creating a VR game
+            under the theme 'Scale is a Lie' — from this simple theme, we
+            developed the central mechanic: a magical wand that could grow and
+            shrink objects. Players could use this wand to solve various puzzles
+            across 5 different levels, starting from the depths of the castle
+            dungeon and eventually making their way to the gatehouse to escape.
+          </p>
+          <p>
+            The game was intended to be played at VR festivals/showcases (which
+            did end up happening when we showed it off at the 2026 QUT open
+            day!), so our target audience were VR beginners, with a specific
+            focus on under 14s. Because of this, I went for an eclectic,
+            hand-drawn aesthetic that drew a lot of inspiration from the Little
+            Big Planet games and their 'toybox' feel.
           </p>
         </section>
 
         <section>
           <h2>What I did</h2>
           <p>
-            My main contribution was building a modular environment and props
-            for the game.
+            Cardboard Castle was my first time ever making a fully custom indoor
+            environment and, while the models were pretty simple, I ran into some
+            challenges with creating texture variants that fit seamlessly in
+            different contexts. I also had to keep performance constraints in
+            mind — because we wanted a game that ran natively on the headset,
+            texture size and count had to be limited in order to mitigate
+            filesize. All of the wall, floor, and roof pieces were atlased in a
+            single texture, which was another first for me as I had never done
+            texture atlasing prior to this!
           </p>
+          <p>
+            This project was probably one of the most valuable learning
+            experiences for me in terms of hard skills. I learnt a lot of
+            important optimisation lessons that have carried over into pretty
+            much all my other development projects. Special shoutout to Mark
+            Auman for the lecture he gave on optimisation during this unit, which
+            was a massive help.
+          </p>
+          <p>
+            In addition to modelling and texturing the environment, I also
+            contributed the following:
+          </p>
+          <ul>
+            <li>All puzzle designs</li>
+            <li>NPC model and texture</li>
+            <li>Some prop models and textures</li>
+          </ul>
         </section>
 
         <section>
           <h2>Tools &amp; technologies</h2>
           <ul class="tag-list">
-            <li>EDIT THIS</li>
-            <li>EDIT THIS</li>
-            <li>EDIT THIS</li>
+            <li>Substance Painter</li>
+            <li>Blender</li>
+            <li>Unity</li>
+            <li>Meta Development Kit</li>
           </ul>
         </section>
       </div>
