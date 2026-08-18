@@ -264,8 +264,78 @@ main {
   position: sticky;
   top: 1.5rem;
 }
-.project-gallery .image-placeholder {
+
+/* Click-through image gallery (src/components/Gallery.astro): one big
+   image on top, small clickable thumbnails below it. */
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.gallery-main {
   aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.gallery-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery-thumbs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+.gallery-thumb {
+  width: 64px;
+  height: 48px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  background: none;
+  cursor: pointer;
+}
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.gallery-thumb:hover {
+  border-color: var(--muted);
+}
+.gallery-thumb.active {
+  border-color: var(--accent);
+}
+
+/* YouTube embed slot */
+.project-video {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.project-video iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  display: block;
+}
+.video-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding: 1rem;
+  aspect-ratio: 16 / 9;
 }
 .project-page section {
   margin-bottom: 2rem;

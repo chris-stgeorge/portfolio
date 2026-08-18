@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Gallery from '../../components/Gallery.astro';
 ---
 
 <Layout title="Psychological Manipulation Simulator — Christopher St George">
@@ -39,14 +40,37 @@ import Layout from '../../layouts/Layout.astro';
         </section>
       </div>
 
-      <!--
-        EDIT THIS: replace these placeholders with real images. Put files
-        in public/images/, then swap each <div> for something like:
-        <img src="/images/project-1-card-1.jpg" alt="Card artwork" />
-      -->
       <div class="project-gallery">
-        <div class="image-placeholder">Card artwork example</div>
-        <div class="image-placeholder">Card artwork example</div>
+        <!--
+          EDIT THIS: once you have real images, put them in public/images/
+          and change each "src" below from the placeholder URL to
+          something like "/images/project-1-card-1.jpg". Add or remove
+          objects from this list for more or fewer photos — the gallery
+          adapts automatically.
+        -->
+        <Gallery
+          images={[
+            { src: 'https://placehold.co/800x600/1b1e25/9299a6?text=Card+Artwork+1', alt: 'Card artwork 1' },
+            { src: 'https://placehold.co/800x600/1b1e25/9299a6?text=Card+Artwork+2', alt: 'Card artwork 2' },
+            { src: 'https://placehold.co/800x600/1b1e25/9299a6?text=Card+Artwork+3', alt: 'Card artwork 3' },
+          ]}
+        />
+
+        <!--
+          EDIT THIS: paste your YouTube video's ID below — it's the part
+          after "v=" in a normal youtube.com/watch?v=... URL. Then delete
+          the placeholder <div> underneath and uncomment this iframe.
+
+          <div class="project-video">
+            <iframe
+              src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID"
+              title="Project video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        -->
+        <div class="video-placeholder">YouTube video will go here</div>
       </div>
     </div>
   </article>

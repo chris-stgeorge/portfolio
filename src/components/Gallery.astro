@@ -1,0 +1,52 @@
+---
+// A "component" is a reusable snippet — one file you can drop into
+// multiple pages, feeding it different content each time via props
+// (here, a list of images). Every project page uses this same file,
+// so editing the gallery's behavior here updates it everywhere at once.
+interface Image {
+  src: string;
+  alt: string;
+}
+interface Props {
+  images: Image[];
+}
+const { images } = Astro.props;
+---
+
+<div class="gallery">
+  <div class="gallery-main">
+    <img src={images[0].src} alt={images[0].alt} />
+  </div>
+  <div class="gallery-thumbs">
+    {images.map((image, i) => (
+      <button
+        type="button"
+        class:list={['gallery-thumb', { active: i === 0 }]}
+        data-src={image.src}
+        data-alt={image.alt}
+        aria-label={`Show image ${i + 1}`}
+      >
+        <img src={image.src} alt="" />
+      </button>
+    ))}
+  </div>
+</div>
+
+<script>
+  // Runs in the visitor's browser (not on the server, unlike the fenced
+  // section above). For every gallery on the page: clicking a thumbnail
+  // swaps the big image above it to match, and highlights that thumbnail.
+  document.querySelectorAll('.gallery').forEach((gallery) => {
+    const mainImage = gallery.querySelector('.gallery-main img');
+    const thumbs = gallery.querySelectorAll('.gallery-thumb');
+
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        mainImage.setAttribute('src', thumb.dataset.src);
+        mainImage.setAttribute('alt', thumb.dataset.alt);
+        thumbs.forEach((t) => t.classList.remove('active'));
+        thumb.classList.add('active');
+      });
+    });
+  });
+</script>
