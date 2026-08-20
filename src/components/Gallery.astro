@@ -34,49 +34,93 @@ const { images } = Astro.props;
 
 <script>
   // Runs in the visitor's browser (not on the server, unlike the fenced
-  // section above). For every gallery on the page: clicking a thumbnail
-  // swaps the big image above it to match, and highlights that thumbnail.
-  // Clicking the big image itself opens it full-screen.
+  // section above). For every gallery on the page: clicking a thumbnail (or
+  // navigating full-screen) swaps the big image to match and highlights the
+  // right thumbnail. Clicking the big image opens it full-screen, where you
+  // can still step through the same set of photos with the arrow buttons,
+  // the ← → keys, or by clicking a thumbnail behind the scenes.
   document.querySelectorAll('.gallery').forEach((gallery) => {
     const mainButton = gallery.querySelector('.gallery-main');
     const mainImage = mainButton.querySelector('img');
-    const thumbs = gallery.querySelectorAll('.gallery-thumb');
+    const thumbs = [...gallery.querySelectorAll('.gallery-thumb')];
+    const images = thumbs.map((thumb) => ({ src: thumb.dataset.src, alt: thumb.dataset.alt }));
 
-    thumbs.forEach((thumb) => {
-      thumb.addEventListener('click', () => {
-        mainImage.setAttribute('src', thumb.dataset.src);
-        mainImage.setAttribute('alt', thumb.dataset.alt);
-        thumbs.forEach((t) => t.classList.remove('active'));
-        thumb.classList.add('active');
-      });
+    function showImage(index) {
+      const image = images[index];
+      mainImage.setAttribute('src', image.src);
+      mainImage.setAttribute('alt', image.alt);
+      thumbs.forEach((thumb, i) => thumb.classList.toggle('active', i === index));
+    }
+
+    thumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => showImage(index));
     });
 
     mainButton.addEventListener('click', () => {
-      openLightbox(mainImage.src, mainImage.alt);
+      const currentIndex = thumbs.findIndex((thumb) => thumb.classList.contains('active'));
+      openLightbox(images, currentIndex, showImage);
     });
   });
 
   // One full-screen viewer, shared by every gallery on the page — created
-  // the first time it's needed. Clicking it anywhere, pressing Escape, or
-  // hitting the close button all close it again.
-  function openLightbox(src, alt) {
+  // the first time it's needed, then reused. Tracks which image list and
+  // index is currently showing so the arrows/keys know what "next" means.
+  let lightboxImages = [];
+  let lightboxIndex = 0;
+  let lightboxOnChange = null;
+
+  function openLightbox(images, index, onChange) {
+    lightboxImages = images;
+    lightboxIndex = index;
+    lightboxOnChange = onChange;
+
     let lightbox = document.querySelector('.lightbox');
     if (!lightbox) {
       lightbox = document.createElement('div');
       lightbox.className = 'lightbox';
-      lightbox.innerHTML =
-        '<button type="button" class="lightbox-close" aria-label="Close full-screen image">&times;</button><img />';
+      lightbox.innerHTML = `
+        <button type="button" class="lightbox-close" aria-label="Close full-screen image">&times;</button>
+        <button type="button" class="lightbox-arrow lightbox-prev" aria-label="Previous image">&larr;</button>
+        <img />
+        <button type="button" class="lightbox-arrow lightbox-next" aria-label="Next image">&rarr;</button>
+      `;
       document.body.appendChild(lightbox);
 
-      lightbox.addEventListener('click', closeLightbox);
+      // Only closes when the backdrop itself is clicked, not the image or
+      // the buttons sitting on top of it.
+      lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox) closeLightbox();
+      });
+      lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+      lightbox.querySelector('.lightbox-prev').addEventListener('click', () => stepLightbox(-1));
+      lightbox.querySelector('.lightbox-next').addEventListener('click', () => stepLightbox(1));
+
       document.addEventListener('keydown', (event) => {
+        if (!lightbox.classList.contains('open')) return;
         if (event.key === 'Escape') closeLightbox();
+        if (event.key === 'ArrowLeft') stepLightbox(-1);
+        if (event.key === 'ArrowRight') stepLightbox(1);
       });
     }
-    const lightboxImage = lightbox.querySelector('img');
-    lightboxImage.src = src;
-    lightboxImage.alt = alt;
+
+    lightbox.classList.toggle('single-image', lightboxImages.length <= 1);
+    renderLightboxImage();
     lightbox.classList.add('open');
+  }
+
+  function stepLightbox(direction) {
+    const count = lightboxImages.length;
+    lightboxIndex = (lightboxIndex + direction + count) % count;
+    renderLightboxImage();
+    if (lightboxOnChange) lightboxOnChange(lightboxIndex);
+  }
+
+  function renderLightboxImage() {
+    const lightbox = document.querySelector('.lightbox');
+    const image = lightboxImages[lightboxIndex];
+    const lightboxImage = lightbox.querySelector('img');
+    lightboxImage.src = image.src;
+    lightboxImage.alt = image.alt;
   }
 
   function closeLightbox() {

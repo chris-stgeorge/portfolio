@@ -325,6 +325,32 @@ main {
   cursor: pointer;
   padding: 0.5rem;
 }
+.lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+}
+.lightbox-arrow:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.lightbox-prev {
+  left: 1.5rem;
+}
+.lightbox-next {
+  right: 1.5rem;
+}
+.lightbox.single-image .lightbox-arrow {
+  display: none;
+}
 .gallery-thumbs {
   display: flex;
   gap: 0.5rem;
