@@ -14,9 +14,9 @@ const { images } = Astro.props;
 ---
 
 <div class="gallery">
-  <div class="gallery-main">
+  <button type="button" class="gallery-main" aria-label="View image full-screen">
     <img src={images[0].src} alt={images[0].alt} />
-  </div>
+  </button>
   <div class="gallery-thumbs">
     {images.map((image, i) => (
       <button
@@ -36,8 +36,10 @@ const { images } = Astro.props;
   // Runs in the visitor's browser (not on the server, unlike the fenced
   // section above). For every gallery on the page: clicking a thumbnail
   // swaps the big image above it to match, and highlights that thumbnail.
+  // Clicking the big image itself opens it full-screen.
   document.querySelectorAll('.gallery').forEach((gallery) => {
-    const mainImage = gallery.querySelector('.gallery-main img');
+    const mainButton = gallery.querySelector('.gallery-main');
+    const mainImage = mainButton.querySelector('img');
     const thumbs = gallery.querySelectorAll('.gallery-thumb');
 
     thumbs.forEach((thumb) => {
@@ -48,5 +50,37 @@ const { images } = Astro.props;
         thumb.classList.add('active');
       });
     });
+
+    mainButton.addEventListener('click', () => {
+      openLightbox(mainImage.src, mainImage.alt);
+    });
   });
+
+  // One full-screen viewer, shared by every gallery on the page — created
+  // the first time it's needed. Clicking it anywhere, pressing Escape, or
+  // hitting the close button all close it again.
+  function openLightbox(src, alt) {
+    let lightbox = document.querySelector('.lightbox');
+    if (!lightbox) {
+      lightbox = document.createElement('div');
+      lightbox.className = 'lightbox';
+      lightbox.innerHTML =
+        '<button type="button" class="lightbox-close" aria-label="Close full-screen image">&times;</button><img />';
+      document.body.appendChild(lightbox);
+
+      lightbox.addEventListener('click', closeLightbox);
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeLightbox();
+      });
+    }
+    const lightboxImage = lightbox.querySelector('img');
+    lightboxImage.src = src;
+    lightboxImage.alt = alt;
+    lightbox.classList.add('open');
+  }
+
+  function closeLightbox() {
+    const lightbox = document.querySelector('.lightbox');
+    if (lightbox) lightbox.classList.remove('open');
+  }
 </script>
